@@ -3,7 +3,7 @@
 #include "Mov.h"
 #include "Ojos.h"
 #include "Roboto.h"
-
+#include "NewPing.h"
 
 
 
@@ -31,10 +31,10 @@ bool scnd = false;
 IRsensor ircentro(IRCENTRO) ;
 IRsensor irizq(IRIZQ) ;
 IRsensor irder(IRDER) ;
-IRsensor irbabor(IRBABOR) ;
-IRsensor irestribor(IRESTRIBOR) ;
+
 IRsensor iratras(IRATRAS) ;
 
+NewPing sonar(3,4,200);
 
 
 
@@ -45,12 +45,10 @@ Mov autito(mizquierdo,mderecho);
 
 Ojos ojos(ircentro,
            irizq,
-           irder,
-           irbabor, 
-           irestribor, 
+           irder, 
            iratras );
 
-Roboto tuber(autito,ojos);
+Roboto tuber(autito,ojos,sonar);
 
 void setup() {
   tuber.iniciar();

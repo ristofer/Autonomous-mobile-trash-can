@@ -12,9 +12,7 @@ public:
 	Ojos(IRsensor sensor1,
 		   IRsensor sensor2,
 		   IRsensor sensor3,
-		   IRsensor sensor4,
-		   IRsensor sensor5,
-		   IRsensor sensor6);
+		   IRsensor sensor4);
 	void iniciar();
 	int ver();
 
@@ -23,8 +21,7 @@ private:
 	IRsensor _sensor2;
 	IRsensor _sensor3;
 	IRsensor _sensor4;
-	IRsensor _sensor5;
-	IRsensor _sensor6;
+
 
 };
 

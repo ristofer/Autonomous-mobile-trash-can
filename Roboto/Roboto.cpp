@@ -2,12 +2,15 @@
 #include "Roboto.h"
 #include "Ojos.h"
 #include "Mov.h"
+#include "NewPing.h"
 
-Roboto::Roboto(Mov base, Ojos ojos):
+Roboto::Roboto(Mov base, Ojos ojos, NewPing sonar):
 _base(base),
-_ojos(ojos)
+_ojos(ojos),
+_sonar(sonar)
 {
-	_nsensor = 6;
+	_nsensor = 4 ;
+	_dobstacle = 500;
 }
 
 void Roboto::iniciar()
@@ -19,7 +22,7 @@ void Roboto::iniciar()
 void Roboto::buscarSenal()
 {
 	_nsensor = _ojos.ver();
-	while(_nsensor==7)
+	while(_nsensor==4)
 	{
 		_base.girarDerecha();
 		_nsensor = _ojos.ver();
@@ -29,13 +32,13 @@ void Roboto::buscarSenal()
 
 void Roboto::alinearse()
 {
-	if(_nsensor==7)
+	if(_nsensor==4)
 	{
 		return buscarSenal();
 	}
 	while(_nsensor!=0)
 		{
-			if (_nsensor<4)
+			if (_nsensor<3)
 			{
 				_base.girarDerecha();
 
@@ -55,6 +58,13 @@ void Roboto::dirigirse()
 {
 	while(_nsensor==0)
 	{
+		_dobstacle = _sonar.ping_cm();
+		while(_dobstacle<=10){
+			_base.detenerse();
+			_dobstacle = _sonar.ping_cm();
+			delay(50);
+
+		}
 		_base.avanzar();
 		_nsensor=_ojos.ver();
 
